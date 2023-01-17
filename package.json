@@ -1,0 +1,19 @@
+{
+  "name": "stock-market-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zemgalis/stock-market-data.git"
+  },
+  "author": "Maris Zemgalis",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/zemgalis/stock-market-data/issues"
+  },
+  "homepage": "https://github.com/zemgalis/stock-market-data#readme"
+}
