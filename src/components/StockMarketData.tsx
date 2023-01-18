@@ -1,11 +1,14 @@
-import { useStockMarketData } from "./hooks/useStockMarketData";
+import { useStockMarketData } from "../hooks/useStockMarketData";
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 
-export const StockMarketData = () => {
-
-  const interval = "5min";
-
-  const { isSuccess, data } = useStockMarketData("IBM", interval);
+export const StockMarketData = ({
+  interval,
+  symbol,
+}: {
+  interval: string;
+  symbol: string;
+}) => {
+  const { isSuccess, data } = useStockMarketData(symbol, interval);
 
   let rows: GridRowsProp = [];
 
@@ -21,7 +24,7 @@ export const StockMarketData = () => {
 
   const TIME_SERIES_KEY = `Time Series (${interval})`;
 
-  if (isSuccess) {
+  if (isSuccess && !data.data["Information"]) {
     const keys = Object.keys(data.data[TIME_SERIES_KEY]);
 
     rows = keys.map((key, index) => {
@@ -36,6 +39,8 @@ export const StockMarketData = () => {
         col7: data.data[TIME_SERIES_KEY][key][VOLUME],
       };
     });
+  } else {
+    rows = [];
   }
 
   const columns: GridColDef[] = [
@@ -50,7 +55,13 @@ export const StockMarketData = () => {
 
   return (
     <div style={{ height: 630, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} onCellClick={cellClickHandler} pageSize={10} />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        onCellClick={cellClickHandler}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
+      />
     </div>
   );
 };
