@@ -4,9 +4,13 @@ import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 export const StockMarketData = ({
   interval,
   symbol,
+  startDateFilter,
+  endDateFilter
 }: {
   interval: string;
   symbol: string;
+  startDateFilter: string | null;
+  endDateFilter: string | null
 }) => {
   const { isSuccess, data } = useStockMarketData(symbol, interval);
 
@@ -14,6 +18,7 @@ export const StockMarketData = ({
 
   const cellClickHandler = (data: any) => {
     console.log("cellClickHandler() ", data);
+    // TODO: on cell click - highlight chart
   };
 
   const OPEN = "1. open";
@@ -27,7 +32,12 @@ export const StockMarketData = ({
   if (isSuccess && !data.data["Information"]) {
     const keys = Object.keys(data.data[TIME_SERIES_KEY]);
 
-    rows = keys.map((key, index) => {
+    const startIndex = startDateFilter ? keys.findIndex(key => key === startDateFilter) : 0;
+    const endIndex = endDateFilter ? keys.findIndex(key => key === endDateFilter) : keys.length - 1 ;
+
+    const filteredKeys = keys.slice(startIndex, endIndex);
+
+    rows = filteredKeys.map((key, index) => {
       return {
         id: key,
         col1: index + 1,

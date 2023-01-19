@@ -10,7 +10,7 @@ import { StockMarketData } from "./StockMarketData";
 
 import { SymbolSelector } from "../components/SymbolSelector";
 import { IntervalSelector } from "../components/IntervalSelector";
-import { DateFilter } from '../components/DateFilter';
+import { DateFilter } from "../components/DateFilter";
 
 const theme = createTheme({
   palette: {
@@ -34,8 +34,6 @@ const App = () => {
     setInterval(event.target.value);
   };
 
-  console.log('App', startDateFilter, endDateFilter);
-
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
@@ -54,12 +52,22 @@ const App = () => {
           </Grid>
           <Grid item xs={1}></Grid>
           <Grid item xs={10}>
-            <DateFilter interval={interval} symbol={symbol} setStartDateFilter={setStartDateFilter} setEndDateFilter={setEndDateFilter} />
+            <DateFilter
+              interval={interval}
+              symbol={symbol}
+              setStartDateFilter={setStartDateFilter}
+              setEndDateFilter={setEndDateFilter}
+            />
           </Grid>
           <Grid item xs={1}></Grid>
           <Grid item xs={1}></Grid>
           <Grid item xs={7}>
-            <StockMarketData interval={interval} symbol={symbol} />
+            <StockMarketData
+              interval={interval}
+              symbol={symbol}
+              startDateFilter={startDateFilter}
+              endDateFilter={endDateFilter}
+            />
           </Grid>
           <Grid item xs={3}>
             <Stack spacing={2}>
