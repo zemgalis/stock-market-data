@@ -2,12 +2,12 @@ import { useState } from "react";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { Grid, Card, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import { StockMarketData } from "./StockMarketData";
-
+import { StockMarketChart } from "./StockMarketChart";
 import { SymbolSelector } from "../components/SymbolSelector";
 import { IntervalSelector } from "../components/IntervalSelector";
 import { DateFilter } from "../components/DateFilter";
@@ -38,18 +38,16 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <Grid container columnSpacing={5} rowSpacing={2}>
-          <Grid
-            sx={{
-              padding: "30px",
-              color: "primary.main",
-              textAlign: "center",
-              fontSize: "30px",
-            }}
-            item
-            xs={12}
-          >
-            Stock Market Data
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10}>
+            <StockMarketChart
+              interval={interval}
+              symbol={symbol}
+              startDateFilter={startDateFilter}
+              endDateFilter={endDateFilter}
+            />
           </Grid>
+          <Grid item xs={1}></Grid>
           <Grid item xs={1}></Grid>
           <Grid item xs={10}>
             <DateFilter
@@ -77,8 +75,6 @@ const App = () => {
                 onChange={onIntervalChange}
               />
             </Stack>
-
-            <Card>card details</Card>
           </Grid>
         </Grid>
       </QueryClientProvider>

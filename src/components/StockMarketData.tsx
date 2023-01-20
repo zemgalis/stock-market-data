@@ -5,21 +5,16 @@ export const StockMarketData = ({
   interval,
   symbol,
   startDateFilter,
-  endDateFilter
+  endDateFilter,
 }: {
   interval: string;
   symbol: string;
   startDateFilter: string | null;
-  endDateFilter: string | null
+  endDateFilter: string | null;
 }) => {
   const { isSuccess, data } = useStockMarketData(symbol, interval);
 
   let rows: GridRowsProp = [];
-
-  const cellClickHandler = (data: any) => {
-    console.log("cellClickHandler() ", data);
-    // TODO: on cell click - highlight chart
-  };
 
   const OPEN = "1. open";
   const HIGH = "2. high";
@@ -30,10 +25,14 @@ export const StockMarketData = ({
   const TIME_SERIES_KEY = `Time Series (${interval})`;
 
   if (isSuccess && !data.data["Information"]) {
-    const keys = Object.keys(data.data[TIME_SERIES_KEY]);
+    const keys = Object.keys(data.data[TIME_SERIES_KEY]).reverse();
 
-    const startIndex = startDateFilter ? keys.findIndex(key => key === startDateFilter) : 0;
-    const endIndex = endDateFilter ? keys.findIndex(key => key === endDateFilter) : keys.length - 1 ;
+    const startIndex = startDateFilter
+      ? keys.findIndex((key) => key === startDateFilter)
+      : 0;
+    const endIndex = endDateFilter
+      ? keys.findIndex((key) => key === endDateFilter)
+      : keys.length - 1;
 
     const filteredKeys = keys.slice(startIndex, endIndex);
 
@@ -68,7 +67,6 @@ export const StockMarketData = ({
       <DataGrid
         rows={rows}
         columns={columns}
-        onCellClick={cellClickHandler}
         pageSize={10}
         rowsPerPageOptions={[10]}
       />

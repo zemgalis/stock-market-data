@@ -13,8 +13,8 @@ export const DateFilter = ({
   setStartDateFilter: (key: string) => void;
   setEndDateFilter: (key: string) => void;
 }) => {
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(100);
+  const [start, setStart] = useState(50);
+  const [end, setEnd] = useState(57);
   const value = [start, end];
   let dateRangePerStep = 0;
 
@@ -25,7 +25,7 @@ export const DateFilter = ({
   const dateSliderIndexMap = new Map();
 
   if (isSuccess && !data.data["Information"]) {
-    const keys = Object.keys(data.data[TIME_SERIES_KEY]);
+    const keys = Object.keys(data.data[TIME_SERIES_KEY]).reverse();
     const length = keys.length;
     dateRangePerStep = Math.floor(length / 100);
 
