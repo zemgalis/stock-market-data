@@ -63,12 +63,12 @@ export const StockMarketData = ({
   ];
 
   return (
-    <div style={{ height: 630, width: "100%" }}>
+    <div style={{ height: 370, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
       />
     </div>
   );
