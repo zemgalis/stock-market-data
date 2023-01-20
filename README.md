@@ -1,3 +1,6 @@
+<img width="1440" alt="stock-market-data" src="https://user-images.githubusercontent.com/944010/213605659-7e8d29b8-e15e-46e3-a49b-c7c52c3ab9e7.png">
+
+
 # Stock Market Data
 
 Approach taken:
